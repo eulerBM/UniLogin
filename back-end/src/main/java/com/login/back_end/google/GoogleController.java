@@ -11,4 +11,11 @@ public class GoogleController {
     public ResponseEntity<?> helloGoogle(){
         return ResponseEntity.ok().body("Oi front-end!");
     }
+
+    @GetMapping("/home")
+    public String home(@RequestHeader("Authorization") String authHeader){
+        String token = authHeader.replace("Bearer ", "");
+        return "Token JWT recebido: " + token;
+
+    }
 }

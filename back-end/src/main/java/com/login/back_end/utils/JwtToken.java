@@ -17,6 +17,7 @@ public class JwtToken {
     private String jwtSecret;
 
     public String generateToken(String email){
+        System.out.println(email);
 
         return Jwts.builder()
                 .issuer("UniLogin_back-end")
@@ -35,6 +36,8 @@ public class JwtToken {
                 .parseSignedClaims(token)
                 .getPayload()
                 .getSubject();
+
+
 
     }
 

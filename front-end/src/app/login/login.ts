@@ -16,15 +16,7 @@ export class Login {
   public message: string = "";
 
   buttonGoogle() {
-    this.requestsService.getApi().subscribe({
-      next: (res) => {
-        this.message = res;       // ✅ resposta da API
-        console.log("API:", res);
-      },
-      error: (err) => {
-        console.error("Erro na API:", err);
-      }
-    });
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
   }
 
 }

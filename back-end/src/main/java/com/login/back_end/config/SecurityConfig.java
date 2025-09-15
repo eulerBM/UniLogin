@@ -42,7 +42,7 @@ public class SecurityConfig {
                             String jwt = jwtToken.generateToken(email);
 
                             response.setHeader("Authorization", "Bearer " + jwt);
-                            response.sendRedirect("/home"); // redireciona para front
+                            response.sendRedirect("http://localhost:4200/google?token=" + jwt); // redireciona para front
                         })));
 
 
