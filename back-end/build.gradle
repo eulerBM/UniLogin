@@ -20,8 +20,25 @@ repositories {
 }
 
 dependencies {
+
+    // Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Oauth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Json
+    implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+    implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.12.6")
+
+    // .env
+    implementation 'me.paulschwarz:spring-dotenv:4.0.0'
+
+    // Others
     testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

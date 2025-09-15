@@ -9,6 +9,6 @@ public class GoogleController {
 
     @GetMapping
     public ResponseEntity<?> helloGoogle(){
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Oi front-end!");
     }
 }
