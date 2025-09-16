@@ -19,4 +19,8 @@ export class Login {
     window.location.href = "http://localhost:8080/oauth2/authorization/google";
   }
 
+  buttonGithub() {
+    window.location.href = "http://localhost:8080/oauth2/authorization/github";
+  }
+
 }

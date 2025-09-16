@@ -35,14 +35,21 @@ public class SecurityConfig {
                         .anyRequest().permitAll() // permite tudo!
 
                 )
+
+                // OAuth2 (Google, Github, Apple, Facebook, Linkdin)
+
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(((request, response, authentication) -> {
                             OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
-                            String email = token.getPrincipal().getAttribute("email");
-                            String jwt = jwtToken.generateToken(email);
+
+                            String email = token.getPrincipal().getAttribute("email"); // Pega o email
+                            String providerName = token.getAuthorizedClientRegistrationId().toLowerCase(); // Pega o nome do provider
+
+                            String jwt = jwtToken.generateToken(email); // Gera o token JWT
 
                             response.setHeader("Authorization", "Bearer " + jwt);
-                            response.sendRedirect("http://localhost:4200/google?token=" + jwt); // redireciona para front
+                            response.sendRedirect("http://localhost:4200/" + providerName + "?token=" + jwt); // redireciona para front
+
                         })));
 
 
