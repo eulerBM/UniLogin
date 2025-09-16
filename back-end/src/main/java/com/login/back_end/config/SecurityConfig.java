@@ -28,7 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Desativa CSRF para testes
-                .cors(Customizer.withDefaults()) //Ativa CORS junto com o Security
+                .cors(Customizer.withDefaults()) // Ativa CORS junto com o Security
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Não guarda session
                 .authorizeHttpRequests(auth -> auth
 
@@ -42,10 +42,9 @@ public class SecurityConfig {
                         .successHandler(((request, response, authentication) -> {
                             OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
 
-                            String email = token.getPrincipal().getAttribute("email"); // Pega o email
                             String providerName = token.getAuthorizedClientRegistrationId().toLowerCase(); // Pega o nome do provider
 
-                            String jwt = jwtToken.generateToken(email); // Gera o token JWT
+                            String jwt = jwtToken.generateTokenOAuth(token.getPrincipal()); // Gera o token JWT
 
                             response.setHeader("Authorization", "Bearer " + jwt);
                             response.sendRedirect("http://localhost:4200/" + providerName + "?token=" + jwt); // redireciona para front
