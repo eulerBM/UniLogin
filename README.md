@@ -1,10 +1,6 @@
 <h1 align="center">🌐 MultiAuth – Login Unificado com Vários Provedores</h1>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/seu-usuario/seu-repo/main/docs/banner.png" alt="MultiAuth Banner" width="800"/>
-</p>
-
-<p align="center">
   <b>Um sistema de autenticação moderno que integra múltiplos provedores de login (Google, GitHub, Facebook, LinkedIn) em um back-end robusto com <i>Spring Boot</i>.</b>
 </p>
 
