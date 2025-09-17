@@ -51,6 +51,8 @@ public class JwtToken {
                 .findFirst()
                 .orElseThrow(() -> new UsernameNotFoundException("Nenhum identificador encontrado"));
 
+        System.out.println(identifierUnique);
+
         return Jwts.builder()
                 .issuer("UniLogin_back-end")
                 .subject(identifierUnique)

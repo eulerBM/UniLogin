@@ -23,4 +23,12 @@ export class Login {
     window.location.href = "http://localhost:8080/oauth2/authorization/github";
   }
 
+  buttonLinkedin() {
+    window.location.href = "http://localhost:8080/oauth2/authorization/linkedin";
+  }
+
+  buttonFacebook() {
+    window.location.href = "http://localhost:8080/oauth2/authorization/facebook";
+  }
+
 }
