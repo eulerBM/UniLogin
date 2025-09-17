@@ -67,7 +67,7 @@ Frontend (Angular) → API REST (Spring Boot) → Provedor OAuth2 → JWT → Fr
 <h2>📸 Demonstrações</h2>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/seu-usuario/seu-repo/main/docs/demo-login.png" alt="Tela de Login" width="600"/>
+  <img src="images/tela_login_UniLogin.png" alt="Tela de Login" width="600"/>
 </p>
 
 ---
