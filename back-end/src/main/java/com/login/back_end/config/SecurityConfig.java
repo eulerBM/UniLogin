@@ -36,7 +36,7 @@ public class SecurityConfig {
 
                 )
 
-                // OAuth2 (Google, Github, Apple, Facebook, Linkdin)
+                // OAuth2 (Google, Github, Facebook, Linkdin)
 
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(((request, response, authentication) -> {

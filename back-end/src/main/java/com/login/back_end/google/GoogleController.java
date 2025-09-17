@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/google")
 public class GoogleController {
 
-    @GetMapping
-    public ResponseEntity<?> helloGoogle(){
-        return ResponseEntity.ok().body("Oi front-end!");
+    private final GoogleService googleService;
+
+    public GoogleController(GoogleService googleService) {
+        this.googleService = googleService;
     }
 
-    @GetMapping("/home")
-    public String home(@RequestHeader("Authorization") String authHeader){
-        String token = authHeader.replace("Bearer ", "");
-        return "Token JWT recebido: " + token;
+    @GetMapping
+    public ResponseEntity<?> google(){
 
+        return googleService.googleHello();
     }
 }
