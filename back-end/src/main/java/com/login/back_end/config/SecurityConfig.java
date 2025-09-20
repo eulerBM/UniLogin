@@ -44,6 +44,8 @@ public class SecurityConfig {
 
                             String providerName = token.getAuthorizedClientRegistrationId().toLowerCase(); // Pega o nome do provider
 
+                            System.out.println(token.getPrincipal());
+
                             String jwt = jwtToken.generateTokenOAuth(token.getPrincipal()); // Gera o token JWT
 
                             response.setHeader("Authorization", "Bearer " + jwt);
