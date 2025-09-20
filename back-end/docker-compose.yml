@@ -7,10 +7,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: unionlogin
-      MYSQL_USER: appuser
-      MYSQL_PASSWORD: app123
+      MYSQL_ROOT_PASSWORD: ${MARIA_DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MARIA_DB_NAME}
+      MYSQL_USER: ${MARIA_DB_USERNAME}
+      MYSQL_PASSWORD: ${MARIA_DB_PASSWORD}
     volumes:
       - mariadb-data:/var/lib/mysql
 
