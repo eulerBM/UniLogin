@@ -1,8 +1,11 @@
 package com.login.back_end.user;
 
+import com.login.back_end.user.enums.Providers;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +28,9 @@ public class User {
     @Column(length = 150)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Set<Providers> providers = new HashSet<>();
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
@@ -41,6 +47,14 @@ public class User {
         this.idPublic = UUID.randomUUID();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public Set<Providers> getProviders() {
+        return providers;
+    }
+
+    public void setProviders(Set<Providers> providers) {
+        this.providers = providers;
     }
 
     public Long getIdPrivate() {

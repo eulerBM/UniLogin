@@ -54,8 +54,9 @@ public class SecurityConfig {
                             String jwt = jwtToken.generateTokenOAuth(token.getPrincipal()); // Gera o token JWT
 
                             userService.processOAuthPostLogin(
-                                    atributos.getAttribute("name"),
-                                    atributos.getAttribute("email")
+                                   atributos.getAttribute("name"),
+                                   atributos.getAttribute("email"),
+                                    providerName
 
                             );
 
