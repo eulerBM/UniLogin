@@ -1,0 +1,103 @@
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --light-bg: rgba(255, 255, 255, 0.1);
+  --text: #f9fafb;
+  --muted: #cbd5e1;
+  --success: #22c55e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #6366f1, #3b82f6, #111827);
+  overflow: hidden;
+}
+
+.success-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  text-align: center;
+  color: var(--text);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.success-container h2 {
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+.message {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+
+.message .highlight {
+  color: var(--success);
+  font-weight: bold;
+}
+
+.token-box {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.token-box h4 {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.token {
+  word-break: break-all;
+  font-size: 0.85rem;
+  color: #e5e7eb;
+  font-family: monospace;
+}
+
+.btn-continue {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: 100%;
+}
+
+.btn-continue:hover {
+  background: var(--primary-hover);
+  transform: scale(1.03);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
