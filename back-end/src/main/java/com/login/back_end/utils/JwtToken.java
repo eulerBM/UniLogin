@@ -51,8 +51,6 @@ public class JwtToken {
                 .findFirst()
                 .orElseThrow(() -> new UsernameNotFoundException("Nenhum identificador encontrado"));
 
-        System.out.println(identifierUnique);
-
         return Jwts.builder()
                 .issuer("UniLogin_back-end")
                 .subject(identifierUnique)
@@ -60,5 +58,16 @@ public class JwtToken {
                 .expiration(new Date(System.currentTimeMillis() + tokenExpiration))
                 .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .compact();
+    }
+
+    public String decodeTokenOAuth(String token){
+
+        return Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
+
     }
 }
