@@ -28,7 +28,7 @@ public class ControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    
+
     @MockitoBean
     private FacebookService facebookService;
     @MockitoBean

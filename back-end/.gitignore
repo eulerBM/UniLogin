@@ -36,5 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
+### CERTIFICADO ###
+src/main/resources/keystore.p12
+
 ### ENV ###
 src/main/resources/.env
