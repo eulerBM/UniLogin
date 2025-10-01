@@ -1,6 +1,7 @@
+import { environment } from './../../environments/environment.development';
 import { Component } from '@angular/core';
 import { RequestsService } from '../services/requests.service';
-import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -12,23 +13,25 @@ import { HttpClient } from '@angular/common/http';
 export class Login {
 
   constructor(private requestsService: RequestsService) {}
+  private apiBase = environment.apiUrl
 
   public message: string = "";
 
+
   buttonGoogle() {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = this.apiBase + "google";
   }
 
   buttonGithub() {
-    window.location.href = "http://localhost:8080/oauth2/authorization/github";
+    window.location.href = this.apiBase + "github";
   }
 
   buttonLinkedin() {
-    window.location.href = "http://localhost:8080/oauth2/authorization/linkedin";
+    window.location.href = this.apiBase + "linkedin";
   }
 
   buttonFacebook() {
-    window.location.href = "http://localhost:8080/oauth2/authorization/facebook";
+    window.location.href = this.apiBase + "facebook";
   }
 
 }
