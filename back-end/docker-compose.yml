@@ -14,5 +14,18 @@ services:
     volumes:
       - mariadb-data:/var/lib/mysql
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-free
+    ports:
+      - "5672:5672"   # Porta para apps (Spring Boot, etc)
+      - "15672:15672" # Painel web
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
 volumes:
   mariadb-data:
+  rabbitmq-data:

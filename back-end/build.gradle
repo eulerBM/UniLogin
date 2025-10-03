@@ -44,6 +44,8 @@ dependencies {
     // .env
     implementation "me.paulschwarz:spring-dotenv:4.0.0"
 
+    // RabbitMQ
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
     // Others
     testImplementation 'org.springframework.security:spring-security-test'
