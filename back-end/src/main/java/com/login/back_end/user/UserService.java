@@ -1,6 +1,10 @@
 package com.login.back_end.user;
 
+import com.login.back_end.rabbitmq.ProducerService;
 import com.login.back_end.user.enums.Providers;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -41,5 +45,20 @@ public class UserService {
             userRepository.save(user);
             return;
         }
+    }
+
+    public ResponseEntity<?> login(String email, String password) throws ChangeSetPersister.NotFoundException {
+
+        Optional<User> userByEmail = userRepository.findByEmail(email);
+
+        if (userByEmail.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum usuario com email: " + email);
+        }
+
+
+    }
+
+    public ResponseEntity<?> createUser(){
+
     }
 }

@@ -19,10 +19,14 @@ repositories {
 }
 
 dependencies {
+    // RABBITMQ
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
     // .ENV
     implementation 'me.paulschwarz:spring-dotenv:4.0.0'
+
+    // EMAIL
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

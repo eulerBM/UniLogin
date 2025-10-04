@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProducerService {
 
-    private AmqpTemplate amqpTemplate;
+    private final AmqpTemplate amqpTemplate;
 
     @Value("${rabbit.exchange}")
     private String exchange;
@@ -20,9 +20,9 @@ public class ProducerService {
         this.amqpTemplate = amqpTemplate;
     }
 
-    public void sendMessage(String msg) {
-        amqpTemplate.convertAndSend(exchange, routingKey, msg);
-        System.out.println("Mensagem enviada: " + msg);
+    public void sendRabbitForEmailWelcome(String email) {
+        System.out.println(email);
+        amqpTemplate.convertAndSend(exchange, routingKey, email);
     }
 
 }

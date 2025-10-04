@@ -24,6 +24,7 @@ export class Google implements OnInit {
 
         // Redireciona limpando o token da URL
         this.router.navigate(['/google']);
+        
       }
     });
   }

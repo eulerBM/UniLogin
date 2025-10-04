@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GoogleService {
 
-    private final ProducerService producerService;
+    private ProducerService producerService;
 
     public GoogleService(ProducerService producerService) {
         this.producerService = producerService;
@@ -15,7 +15,9 @@ public class GoogleService {
 
     public ResponseEntity<?> googleHello(){
 
-        producerService.sendMessage("Oi euler To enviando entre os Back end!");
+        System.out.println("Estou batendo na rota google!");
+
+        producerService.sendRabbitForEmailWelcome("eullerborgesdamotta155@gmail.com");
 
         return ResponseEntity.ok().body("Hello Google");
     }

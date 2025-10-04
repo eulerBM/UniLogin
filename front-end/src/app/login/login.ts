@@ -1,8 +1,7 @@
 import { environment } from './../../environments/environment.development';
 import { Component } from '@angular/core';
 import { RequestsService } from '../services/requests.service';
-
-
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +11,14 @@ import { RequestsService } from '../services/requests.service';
 })
 export class Login {
 
-  constructor(private requestsService: RequestsService) {}
+  constructor(private requestsService: RequestsService, private router: Router) {}
   private apiBase = environment.apiUrl
 
   public message: string = "";
 
+  buttonRegister() {
+    this.router.navigate(['/register']);
+  }
 
   buttonGoogle() {
     window.location.href = this.apiBase + "google";

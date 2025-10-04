@@ -1,5 +1,6 @@
 package com.login.back_end.config;
 
+import com.login.back_end.rabbitmq.ProducerService;
 import com.login.back_end.user.UserService;
 import com.login.back_end.utils.JwtToken;
 import org.springframework.context.annotation.Bean;
@@ -19,14 +20,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private JwtToken jwtToken;
-    private UserService userService;
+    private final JwtToken jwtToken;
+    private final UserService userService;
+    private final ProducerService producerService;
 
-    public SecurityConfig(JwtToken jwtToken, UserService userService) {
+    public SecurityConfig(JwtToken jwtToken, UserService userService, ProducerService producerService) {
         this.jwtToken = jwtToken;
         this.userService = userService;
+        this.producerService = producerService;
     }
-
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -44,12 +46,11 @@ public class SecurityConfig {
 
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(((request, response, authentication) -> {
+
                             OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
 
                             String providerName = token.getAuthorizedClientRegistrationId().toLowerCase(); // Pega o nome do provider
                             OAuth2User atributos = token.getPrincipal();
-
-                            System.out.println(token.getPrincipal()); // Pra pega o name é igual so muda o final -> name
 
                             String jwt = jwtToken.generateTokenOAuth(token.getPrincipal()); // Gera o token JWT
 
@@ -61,7 +62,7 @@ public class SecurityConfig {
                             );
 
                             response.setHeader("Authorization", "Bearer " + jwt);
-                            response.sendRedirect("http://localhost:4200/" + providerName + "?token=" + jwt); // redireciona para front
+                            response.sendRedirect("http://localhost:4200/" + providerName + "?token=" + jwt);
 
                         })));
 
