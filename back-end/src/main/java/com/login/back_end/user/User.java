@@ -49,6 +49,9 @@ public class User {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public User() {
+    }
+
     public Set<Providers> getProviders() {
         return providers;
     }

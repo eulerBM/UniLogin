@@ -29,7 +29,7 @@ export class RegisterComponent {
       console.log("dados do form: " + formData.nome);
 
       // Enviando para API
-      this.http.post('http://localhost:8080/api/users', formData)
+      this.http.post('https://localhost:8443/user', formData)
         .subscribe({
           next: (res) => console.log('Usuário criado:', res),
           error: (err) => console.error('Erro:', err)
