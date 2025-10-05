@@ -1,6 +1,7 @@
 package com.login.back_end.user;
 
 import com.login.back_end.user.dtos.CreateUserDTO;
+import com.login.back_end.user.dtos.LoginUserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,4 +25,12 @@ public class UserController {
         return userService.createUser(data);
 
     }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginUserDTO data){
+
+        return userService.loginUser(data);
+
+    }
+
 }

@@ -18,7 +18,6 @@ public class EmailService {
     private String emailServer;
 
     public void senderEmailWelcome(String to){
-        System.out.println(to);
 
         SimpleMailMessage message = new SimpleMailMessage();
 

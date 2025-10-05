@@ -1,6 +1,7 @@
 package com.login.back_end.user;
 
 import com.login.back_end.user.dtos.CreateUserDTO;
+import com.login.back_end.user.dtos.LoginUserDTO;
 import com.login.back_end.user.enums.Providers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,12 +58,9 @@ public class UserService {
 
         return ResponseEntity.ok().build();
 
-
     }
 
     public ResponseEntity<?> createUser(CreateUserDTO data){
-
-        System.out.println(data);
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -89,6 +87,32 @@ public class UserService {
         userRepository.save(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+
+    }
+
+    public ResponseEntity<?> loginUser(LoginUserDTO data) {
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        Optional<User> userEmail = userRepository.findByEmail(data.email());
+
+        if (userEmail.isEmpty()){
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("E-mail não cadastrado");
+
+        }
+
+        User user = userEmail.get();
+
+        boolean correctPassword = bCryptPasswordEncoder.matches(data.password(), user.getPassword());
+
+        if (!correctPassword){
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("E-mail ou senha incorretos");
+
+        }
+
+        return ResponseEntity.ok().build();
 
     }
 }
