@@ -1,8 +1,10 @@
 package com.login.back_end.user;
 
+import com.login.back_end.rabbitmq.ProducerService;
 import com.login.back_end.user.dtos.CreateUserDTO;
 import com.login.back_end.user.dtos.LoginUserDTO;
 import com.login.back_end.user.enums.Providers;
+import com.login.back_end.utils.JwtToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,9 +16,13 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final JwtToken jwtToken;
+    private ProducerService producerService;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, JwtToken jwtToken, ProducerService producerService) {
         this.userRepository = userRepository;
+        this.jwtToken = jwtToken;
+        this.producerService = producerService;
     }
 
     // Fazer a logica pra salvar os dados vindo dos provedores...
@@ -112,7 +118,11 @@ public class UserService {
 
         }
 
-        return ResponseEntity.ok().build();
+        String jwtTokenUser = jwtToken.generateToken(data.email());
+
+        producerService.sendRabbitForEmailWelcome(data.email());
+
+        return ResponseEntity.ok().body(jwtTokenUser);
 
     }
 }
