@@ -3,6 +3,8 @@ package com.login.back_end.user;
 import com.login.back_end.rabbitmq.ProducerService;
 import com.login.back_end.user.dtos.CreateUserDTO;
 import com.login.back_end.user.dtos.LoginUserDTO;
+import com.login.back_end.user.dtos.response.ErroResponse;
+import com.login.back_end.user.dtos.response.LoginOkResponse;
 import com.login.back_end.user.enums.Providers;
 import com.login.back_end.utils.JwtToken;
 import org.springframework.http.HttpStatus;
@@ -24,8 +26,7 @@ public class UserService {
         this.jwtToken = jwtToken;
         this.producerService = producerService;
     }
-
-    // Fazer a logica pra salvar os dados vindo dos provedores...
+    
     public void processOAuthPostLogin(String name, String email, String provider){
 
         Optional<User> userEmail = userRepository.findByEmail(email);
@@ -104,7 +105,7 @@ public class UserService {
 
         if (userEmail.isEmpty()){
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("E-mail não cadastrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErroResponse(404, "E-mail não cadastrado"));
 
         }
 
@@ -114,15 +115,15 @@ public class UserService {
 
         if (!correctPassword){
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("E-mail ou senha incorretos");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErroResponse(400, "E-mail ou senha incorretos"));
 
         }
 
         String jwtTokenUser = jwtToken.generateToken(data.email());
 
-        producerService.sendRabbitForEmailWelcome(data.email());
+        //producerService.sendRabbitForEmailWelcome(data.email()); Envia email de boas-vindas
 
-        return ResponseEntity.ok().body(jwtTokenUser);
+        return ResponseEntity.ok().body(new LoginOkResponse(200, jwtTokenUser));
 
     }
 }
